@@ -9,3 +9,5 @@ headers={
 url = "https://api.surveymonkey.net/v3/surveys/274000446/responses/bulk"
 response = requests.get(url, headers=headers)
 survey_data = response.json()
+
+print(survey_data)
