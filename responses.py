@@ -23,3 +23,9 @@ survey_responses = response2.json()
 url3 = "https://api.surveymonkey.net/v3/surveys/274000446/pages/104874047/questions"
 response3 = requests.get(url3, headers=headers)
 survey_questions = response3.json()
+
+#prints question headings
+for x in survey_questions['data']:
+    for (y,z) in x.items():
+        if y == 'heading':
+            print(z)
