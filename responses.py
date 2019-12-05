@@ -24,8 +24,20 @@ url3 = "https://api.surveymonkey.net/v3/surveys/274000446/pages/104874047/questi
 response3 = requests.get(url3, headers=headers)
 survey_questions = response3.json()
 
-#prints question headings
+#prints question headings & corresponding id
 for x in survey_questions['data']:
     for (y,z) in x.items():
         if y == 'heading':
             print(z)
+        elif y == 'id':
+            print(z)
+
+#prints question ids and choice ids (messy)
+for x in survey_responses['data']:
+    for (y, z) in x.items():
+        if y == 'pages':
+            for a in z:
+                for b,c in a.items():
+                    if b == 'questions':
+                        for d in c:
+                            print(d)
