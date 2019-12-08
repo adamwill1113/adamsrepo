@@ -37,6 +37,30 @@ for x in survey_questions['data']:
                 
 qdict = dict(zip(qid, qtitle))
 
+# Creates dictionary of choice ids and text for later remapping
+#gets question details
+ctext = []
+cid = []
+
+for i in qid:
+    url1 = "https://api.surveymonkey.net/v3/surveys/274000446/pages/104874047/questions/%s" % i
+    response1 = requests.get(url1, headers=headers)
+    question_details = response1.json()
+    #print(question_details)
+    for j, k in question_details.items():
+        if j == 'answers':
+            for l, m in k.items():
+                if l == 'choices':
+                    for n in m:
+                        for z, x in n.items():
+                            if z == 'text':
+                                ctext.append(x)
+                            elif z == 'id':
+                                cid.append(x)
+
+cdict = dict(zip(cid, ctext))
+
+
 #gets list of questions and corresponding choices
 questions = []
 answers = []
