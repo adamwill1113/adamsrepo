@@ -24,19 +24,20 @@ url3 = "https://api.surveymonkey.net/v3/surveys/274000446/pages/104874047/questi
 response3 = requests.get(url3, headers=headers)
 survey_questions = response3.json()
 
-# Writes the question headings as row headings in a csv
-with open('mycsv.csv', 'w', newline='') as f:
-    thewriter = csv.writer(f, delimiter = ',')
-    for x in survey_questions['data']:
+# Creates dictionary of question ids and titles for later remapping
+qtitle = []
+qid = []
+
+for x in survey_questions['data']:
         for (y,z) in x.items():
-            if y == 'heading':
-                colHeading = [z]
-                thewriter.writerow(colHeading)
-            #elif y == 'id':
-             #   print(z)
+            if y == 'id':
+                qid.append(z)
+            elif y == 'heading':
+                qtitle.append(z)
+                
+qdict = dict(zip(qid, qtitle))
 
 #gets list of questions and corresponding choices
-
 questions = []
 answers = []
 
