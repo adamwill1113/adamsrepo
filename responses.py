@@ -51,8 +51,11 @@ for x in survey_responses['data']:
                                 if e == 'id':
                                     questions.append(f)
                                 else:
-                                    answers.append(f)
-                                    
+                                    #answers.append(f)
+                                    for g in f:
+                                        for h, i in g.items():
+                                            if h == 'choice_id':
+                                                answers.append(i)                                    
 #zips questions and answers together
 matches = list(zip(questions, answers))
 
