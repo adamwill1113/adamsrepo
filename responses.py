@@ -35,7 +35,11 @@ with open('mycsv.csv', 'w', newline='') as f:
             #elif y == 'id':
              #   print(z)
 
-#prints question ids and choice ids (messy)
+#gets list of questions and corresponding choices
+
+questions = []
+answers = []
+
 for x in survey_responses['data']:
     for (y, z) in x.items():
         if y == 'pages':
@@ -43,4 +47,26 @@ for x in survey_responses['data']:
                 for b,c in a.items():
                     if b == 'questions':
                         for d in c:
-                            print(d)
+                            for e,f in d.items():
+                                if e == 'id':
+                                    questions.append(f)
+                                else:
+                                    answers.append(f)
+                                    
+#zips questions and answers together
+matches = list(zip(questions, answers))
+
+d = defaultdict(list)
+
+#combines like values
+for k, *v in matches:
+    d[k].append(v)
+    
+sorted_matches = []
+
+sorted_matches = list(d.items())
+
+#puts sorted matches into datafram
+df = pd.DataFrame(sorted_matches)
+
+df
