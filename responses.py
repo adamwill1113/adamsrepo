@@ -73,3 +73,12 @@ sorted_matches = list(d.items())
 df = pd.DataFrame(sorted_matches)
 
 df
+
+#separates out answers into multiple columns
+df0 = pd.DataFrame(df[0])
+df1 = pd.DataFrame(df[1].tolist())
+
+#puts the dataframe back together
+result = pd.concat([df0, df1], axis=1)
+df2 = pd.DataFrame(result)
+df2
