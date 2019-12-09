@@ -81,29 +81,15 @@ for x in survey_responses['data']:
                                         for h, i in g.items():
                                             if h == 'choice_id':
                                                 answers.append(i)                                    
-#zips questions and answers together
-matches = list(zip(questions, answers))
 
-d = defaultdict(list)
+#puts questions and answers into a dictionary and then into a dataframe
+temp = defaultdict(list)
 
-#combines like values
-for k, *v in matches:
-    d[k].append(v)
+for key, value in zip(questions, answers):
+    temp[key].append(value)
     
-sorted_matches = []
+adict = (dict(temp))
 
-sorted_matches = list(d.items())
-
-#puts sorted matches into datafram
-df = pd.DataFrame(sorted_matches)
+df = pd.DataFrame({ key:pd.Series(value) for key, value in adict.items()})
 
 df
-
-#separates out answers into multiple columns
-df0 = pd.DataFrame(df[0])
-df1 = pd.DataFrame(df[1].tolist())
-
-#puts the dataframe back together
-result = pd.concat([df0, df1], axis=1)
-df2 = pd.DataFrame(result)
-df2
