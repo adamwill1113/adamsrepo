@@ -62,6 +62,7 @@ cdict = dict(zip(cid, ctext))
 
 
 #gets list of questions and corresponding choices
+
 questions = []
 answers = []
 
@@ -74,13 +75,15 @@ for x in survey_responses['data']:
                         for d in c:
                             for e,f in d.items():
                                 if e == 'id':
-                                    questions.append(f)
+                                    #questions.append(f)
+                                    #pass
+                                    temp = f
                                 else:
-                                    #answers.append(f)
                                     for g in f:
                                         for h, i in g.items():
                                             if h == 'choice_id':
-                                                answers.append(i)                                    
+                                                answers.append(i)
+                                                questions.append(temp)                                    
 
 #puts questions and answers into a dictionary and then into a dataframe
 temp = defaultdict(list)
