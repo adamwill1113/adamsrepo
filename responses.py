@@ -49,6 +49,7 @@ for x in survey_responses['data']:
                                                 answers.append(i)
                                                 questions.append(temp)
 
+#zips questions and answers together as a single dictionary
 temp = defaultdict(list)
 
 for key, value in zip(questions, answers):
@@ -58,6 +59,7 @@ adict = (dict(temp))
 
 df = pd.DataFrame({ key:pd.Series(value) for key, value in adict.items()})
 
+#zips question id and question title together in key, value pairs
 qtitle = []
 qid = []
 
@@ -70,7 +72,7 @@ for x in survey_questions['data']:
                 
 qdict = dict(zip(qid, qtitle))
 
-#gets question details
+#gets choice details and zips choice id and text together in key, value pairs
 ctext = []
 cid = []
 
@@ -89,13 +91,11 @@ for i in qid:
                                 ctext.append(x)
                             elif z == 'id':
                                 cid.append(x)
-
-#replaces ids with text values                                
+                                
 cdict = dict(zip(cid, ctext))
 
-temp = qdict
-temp2 = adict
 
+#converts id based dataframe to text based dataframe and then writes to csv
 df1 = pd.DataFrame(df)
 
 qtitle.pop()
@@ -105,5 +105,4 @@ df1.columns = qtitle
 
 df2 = df1.replace(cdict)
 
-#write to file
 df2.to_csv(r'results.csv')
