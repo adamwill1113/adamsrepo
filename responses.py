@@ -6,7 +6,7 @@ from collections import defaultdict
 
 
 headers={
-"Authorization": "Bearer %s" % "eaP1DmlrVqcdtnhOS8csezAcxolrQmL1u8k2XiuuF7qL5.Qy5jDitlLCjGIaK76W.zGsd6-88a3JiDIJn7SSBG67JS99GSWirimCfWRkK4fIERLhTGfnbjPxT-fob1N8",
+"Authorization": "Bearer %s" % "MY_ACCESS_TOKEN",
 "Content-Type": "application/json"
 }
 
